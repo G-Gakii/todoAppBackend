@@ -40,6 +40,7 @@ const registerUser = async (req: Request, res: Response) => {
     });
     console.log("cookie set successfully");
     res.json(user);
+    return;
   } catch (error) {
     res.status(500).json({ message: `internal server error ${error}` });
   }
