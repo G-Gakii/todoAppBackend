@@ -28,7 +28,7 @@ const registerUser = async (req: Request, res: Response) => {
       email,
       password: hashedPasword,
     });
-    const user = newuser.save();
+    const user = await newuser.save();
     const token = generateToken((await user)._id);
     res.cookie("token", token, {
       domain: "localhost",
