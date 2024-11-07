@@ -1,9 +1,10 @@
+import { AuthenticatedRequest } from "../interface/auth";
 import Task from "../model/task.model";
 import { Request, Response } from "express";
 
-const getTasks = async (req: Request, res: Response) => {
+const getTasks = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const tasks = await Task.find({});
+    const tasks = await Task.find({ owner: req.user?._id });
     res.status(200).json(tasks);
     return;
   } catch (error) {
@@ -27,15 +28,21 @@ const getTask = async (req: Request, res: Response) => {
   }
 };
 
-const createTask = async (req: Request, res: Response) => {
+const createTask = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { title, description, status } = req.body;
     if (!title) {
       res.status(400).json({ message: "title is required" });
       return;
     }
-    const task = await Task.create(req.body);
-    res.status(200).json(task);
+    const newTask = new Task({
+      title,
+      description,
+      status,
+      owner: req.user?._id,
+    });
+    const task = await newTask.save();
+    res.status(201).json(task);
   } catch (error) {
     if (error instanceof Error) {
       res.status(500).json({ message: error.message });

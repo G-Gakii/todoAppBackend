@@ -11,6 +11,7 @@ import {
 } from "../controller/task";
 import autheticate from "../middleware/auth.middleware";
 import getUser from "../controller/user";
+import checkAuthorization from "../middleware/authorization.middleware";
 
 const route = express.Router();
 
@@ -20,9 +21,9 @@ route.get("/logout", autheticate, logOut);
 route.get("/profile", autheticate, getUser);
 
 route.get("/tasks", autheticate, getTasks);
-route.get("/tasks/:id", autheticate, getTask);
+route.get("/tasks/:id", autheticate, checkAuthorization, getTask);
 route.post("/tasks", autheticate, createTask);
-route.put("/tasks/:id", autheticate, updateTask);
-route.delete("/tasks/:id", autheticate, deleteTask);
+route.put("/tasks/:id", autheticate, checkAuthorization, updateTask);
+route.delete("/tasks/:id", autheticate, checkAuthorization, deleteTask);
 
 export default route;

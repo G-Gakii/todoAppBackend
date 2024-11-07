@@ -3,5 +3,6 @@ interface task {
   title: string;
   description: string;
   status: string;
+  owner: string;
 }
 export default task;

@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import task from "../interface/task";
+import User from "./user.model";
 
 const TaskSchema = new mongoose.Schema(
   {
@@ -13,6 +14,11 @@ const TaskSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["to-do", "in-progress", "done"],
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: User,
+      required: true,
     },
   },
   {
