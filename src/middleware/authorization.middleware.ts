@@ -19,7 +19,7 @@ const checkAuthorization = async (
       return;
     }
     if (task.owner.toString() !== req.user?.id.toString()) {
-      res.status(403).json({ mesage: "acess denied" });
+      res.status(403).json({ mesage: "access denied" });
       return;
     }
     next();
