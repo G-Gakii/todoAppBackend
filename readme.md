@@ -29,9 +29,7 @@
 
 ## My process
 
-## link
 
-- Live Site URL: (https://todoappbackend-9s1a.onrender.com/api/user/tasks/)
 
 ### Prerequisites
 
@@ -56,6 +54,10 @@
 1. Start the backend server:
    - cd backend
    - npm start
+
+  ## Base url
+
+-  https://todoappbackend-9s1a.onrender.com/
 
 ### API Endpoints
 
