@@ -29,17 +29,9 @@ const registerUser = async (req: Request, res: Response) => {
       password: hashedPasword,
     });
     const user = await newuser.save();
-    const token = generateToken((await user)._id);
-    res.cookie("token", token, {
-      domain: "localhost",
-      path: "/",
-      expires: new Date(Date.now() + 86400000),
-      secure: true,
-      httpOnly: true,
-      sameSite: "none",
-    });
-    console.log("cookie set successfully");
-    res.json(user);
+    const access_token = generateToken((await user)._id);
+
+    res.json(access_token);
     return;
   } catch (error) {
     res.status(500).json({ message: `internal server error ${error}` });

@@ -17,10 +17,11 @@ const corsOptions = {
 };
 
 // middleware
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors(corsOptions));
+
 app.use("/api/user", authRouter);
 
 app.listen(PORT, () => {

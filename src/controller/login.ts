@@ -21,14 +21,7 @@ const login = async (req: Request, res: Response) => {
       return;
     }
     const token = generateToken(user._id);
-    res.cookie("token", token, {
-      domain: "localhost",
-      path: "/",
-      expires: new Date(Date.now() + 86400000),
-      secure: true,
-      httpOnly: true,
-      sameSite: "none",
-    });
+
     res.json({ token });
     return;
   } catch (error) {

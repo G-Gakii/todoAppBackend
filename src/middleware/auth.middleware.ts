@@ -10,11 +10,13 @@ const autheticate = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies.token;
-    if (!token) {
-      res.status(403).json({ message: "access denied" });
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      res.status(401).json({ message: "Unauthorized" });
       return;
     }
+    const bearerToken = authHeader.split(" ");
+    const token = bearerToken[1];
     const decode = jwt.verify(token, process.env.SECRET_TOKEN as string) as {
       id: string;
     };
