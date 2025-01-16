@@ -11,12 +11,16 @@ const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
+const corsOptions = {
+  origin: "http://localhost:4200",
+  optionsSuccessStatus: 200,
+};
 
 // middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors(corsOptions));
 app.use("/api/user", authRouter);
 
 app.listen(PORT, () => {
